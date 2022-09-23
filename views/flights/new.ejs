@@ -2,14 +2,14 @@
 <%- include('../partials/nav') %>
 <main>
   <h1><%= title %> </h1>
-  <form id="new-form" action="" method="">
+  <form id="new-form" action="/flights" method="post">
     <label for="Airline Input">Airline:</label>
     <input type="text" name="airline" id="airline-input">
-    <label for="Airline Input">Airline:</label>
+    <label for="Airport Input">Airport:</label>
     <input type="text" name="airport" id="airport-input">
-    <label for="Airline Input">Airline:</label>
+    <label for="Flight Number Input">Flight No.:</label>
     <input type="text" name="flightNo" id="flightNo-input">
-    <label for="Airline Input">Airline:</label>
+    <label for="Departure Input">Departure Date/Time:</label>
     <input type="datetime-local" name="departs" id="departure-input">
     <button type="submit">Add Flight</button>
   </form>

@@ -14,8 +14,15 @@ function newFlight(req,res){
     title:'New Flight'
   })
 }
+function create(req,res){
+  Flight.create(req.body)
+  .then(flight => {
+    res.redirect('flights')
+  })
+}
 
 export {
   index,
   newFlight as new,
+  create,
 }
