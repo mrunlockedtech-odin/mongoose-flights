@@ -17,7 +17,9 @@
         <% flights.forEach(flight=> { %>
           <tr>
             <td>
-              <%=flight.airline%>
+              <a href="/flights/<%= flight._id %>">
+                <%=flight.airline%>
+              </a>
             </td>
             <td>
               <%=flight.airport%>
