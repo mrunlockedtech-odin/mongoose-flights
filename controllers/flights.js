@@ -10,42 +10,67 @@ function index(req, res) {
     })
     .catch(error => {
       console.log(error)
-      res.redirect('/todos')
+      res.redirect('/flights')
     })
 }
-function newFlight(req,res){
+function newFlight(req, res) {
   res.render('flights/new', {
-    title:'New Flight'
+    title: 'New Flight'
   })
 }
-function create(req,res){
+function create(req, res) {
   Flight.create(req.body)
-  .then(flight => {
-    res.redirect('/flights')
-  })
-  .catch(error => {
-    console.log(error)
-    res.redirect('/todos')
-  })
-}
-function deleteFlight(req,res){
-  Flight.findByIdAndDelete(req.params.id)
-  .then(flight => {
-    res.redirect('/flights')
-  })
-  .catch(error => {
-    console.log(error)
-    res.redirect('/todos')
-  })
-}
-function show(req,res){
-  Flight.findById(req.params.id)
-  .then(flight => {
-    res.render('flights/show', {
-      flight:flight,
-      title: "Flight No : " +flight.flightNo
+    .then(flight => {
+      res.redirect('/flights')
     })
-  })
+    .catch(error => {
+      console.log(error)
+      res.redirect('/flights')
+    })
+}
+function deleteFlight(req, res) {
+  Flight.findByIdAndDelete(req.params.id)
+    .then(flight => {
+      res.redirect('/flights')
+    })
+    .catch(error => {
+      console.log(error)
+      res.redirect('/flights')
+    })
+}
+function show(req, res) {
+  Flight.findById(req.params.id)
+    .then(flight => {
+      res.render('flights/show', {
+        flight: flight,
+        title: "Flight No : " + flight.flightNo
+      })
+    })
+    .catch(error => {
+      console.log(error)
+      res.redirect('/flights')
+    })
+}
+
+function update(req, res) {
+  Flight.findByIdAndUpdate(req.params.id, req.body, {new:true})
+    .then(flight => {
+      res.redirect(`/flights/${flight._id}`)
+    })
+}
+function edit(req, res) {
+  Flight.findById(req.params.id)
+    .then(flight => {
+      console.log(flight.departs)
+      res.render('flights/edit', {
+        flight: flight,
+        title: "Edit " + flight.flightNo,
+      })
+    })
+    .catch(error => {
+      console.log(error)
+      res.redirect('/flights')
+    })
 }
 
 export {
@@ -54,4 +79,6 @@ export {
   create,
   deleteFlight as delete,
   show,
+  update,
+  edit,
 }
