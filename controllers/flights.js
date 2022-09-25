@@ -41,6 +41,7 @@ function deleteFlight(req, res) {
 function show(req, res) {
   Flight.findById(req.params.id)
     .then(flight => {
+      console.log(flight)
       res.render('flights/show', {
         flight: flight,
         title: "Flight No : " + flight.flightNo
@@ -53,7 +54,7 @@ function show(req, res) {
 }
 
 function update(req, res) {
-  Flight.findByIdAndUpdate(req.params.id, req.body, {new:true})
+  Flight.findByIdAndUpdate(req.params.id, req.body, { new: true })
     .then(flight => {
       res.redirect(`/flights/${flight._id}`)
     })
@@ -61,9 +62,16 @@ function update(req, res) {
 function edit(req, res) {
   Flight.findById(req.params.id)
     .then(flight => {
-      console.log(flight.departs)
+      const stringDate = flight.departs.toISOString().slice(0, 16)
+      const time = flight.departs.toLocaleTimeString([], { timeStyle: 'short' })
+      const hour = time.substring(0, time.indexOf(':'))
+      const dayNight = time.slice(-2)
+      const updatedHour = dayNight === "AM" ? hour : String(parseInt(hour) + 12)
+      const paddedHour = updatedHour.padStart(2, '0')
+      const correctedDeparture = stringDate.slice(0, stringDate.indexOf("T") + 1) + paddedHour + stringDate.slice(stringDate.indexOf('T') + 3)
       res.render('flights/edit', {
         flight: flight,
+        departure: correctedDeparture,
         title: "Edit " + flight.flightNo,
       })
     })

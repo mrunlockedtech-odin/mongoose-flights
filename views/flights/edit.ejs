@@ -8,8 +8,8 @@
       <label for="Flight Number Input">Flight No.:</label>
       <input type="text" name="flightNo" id="flightNo-input" value="<%= flight.flightNo %>">
       <label for="Departure Input">Departure Date/Time:</label>
-      <input type="datetime-local" name="departs" id="departure-input">
-      <p><%= flight.departs%></p>
+      <input type="datetime-local" name="departs" id="departure-input" value=<%= departure %> >
       <button type="submit">Edit Flight</button>
     </form>
+    <p><%= departure %></p>
     <%- include('../partials/footer') %>
