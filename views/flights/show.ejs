@@ -10,10 +10,10 @@
     <h2>Departure: <%= flight.departs %>
     </h2>
     <a href="/flights/<%= flight.id %>/edit">Edit</a>
-    <h2>Flights</h2>
+    <h2>Tickets</h2>
     <form id="add-ticket-form" action="/flights/<%=flight._id%>/tickets" method="POST">
       <label for="seatNum">Seat Number: </label>
-      <input type="text" name="seat" id="seatNum">
+      <input name="seat" required pattern="[A-F][1-9]\d?">
       <label for="ticket-price">Price: </label>
       <input type="text" name="price" id="ticket-price">
       <button type="submit">Submit</button>
