@@ -16,16 +16,15 @@ function index(req, res) {
 function newFlight(req, res) {
   const newFlight = new Flight()
   const dt = newFlight.departs
-  const departsDate = dt.toISOString().slice(0,16)
-  console.log(departsDate)
+  const departsDate = dt.toISOString().slice(0, 16)
   res.render('flights/new', {
     title: 'New Flight',
-    departsDate:departsDate
+    departsDate: departsDate
   })
-  .catch(error => {
-    console.log(error)
-    res.redirect('/flights')
-  })
+    .catch(error => {
+      console.log(error)
+      res.redirect('/flights')
+    })
 }
 function create(req, res) {
   Flight.create(req.body)
@@ -50,7 +49,6 @@ function deleteFlight(req, res) {
 function show(req, res) {
   Flight.findById(req.params.id)
     .then(flight => {
-      console.log(flight)
       res.render('flights/show', {
         flight: flight,
         title: "Flight No : " + flight.flightNo
@@ -75,7 +73,7 @@ function update(req, res) {
 function edit(req, res) {
   Flight.findById(req.params.id)
     .then(flight => {
-      const correctedDeparture = flight.departs.toISOString().slice(0,16)
+      const correctedDeparture = flight.departs.toISOString().slice(0, 16)
       res.render('flights/edit', {
         flight: flight,
         departure: correctedDeparture,
@@ -88,6 +86,25 @@ function edit(req, res) {
     })
 }
 
+function createTicket(req, res) {
+  Flight.findById(req.params.id)
+  .then(flight => {
+    flight.tickets.push(req.body)
+    flight.save()
+    .then(() => {
+      res.redirect(`/flights/${flight._id}`)
+    })
+    .catch(error => {
+      console.log(error)
+      res.redirect('/flights')
+    })
+  })
+  .catch(error => {
+    console.log(error)
+    res.redirect('/flights')
+  })
+}
+
 export {
   index,
   newFlight as new,
@@ -96,4 +113,5 @@ export {
   show,
   update,
   edit,
+  createTicket,
 }

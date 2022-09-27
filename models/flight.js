@@ -7,38 +7,37 @@ const ticketSchema = new Schema({
     type: String,
     match: /[A-F][1-9]\d?/
   },
-  price : {
+  price: {
     type: Number,
     min: 0
   }
-})
+},
+  { timestamps: true })
 
 const flightSchema = new Schema({
   airline: {
-    type:String,
-    enum: ['American','Southwest', 'United']
+    type: String,
+    enum: ['American', 'Southwest', 'United']
   },
   airport: {
-    type:String,
-    default:"DEN",
-    enum:['AUS','DFW','DEN','LAX','SAN']
+    type: String,
+    default: "DEN",
+    enum: ['AUS', 'DFW', 'DEN', 'LAX', 'SAN']
   },
   flightNo: {
-    type:Number,
-    min:10,
-    max:9999
+    type: Number,
+    min: 10,
+    max: 9999
   },
   departs: {
-    type:Date,
+    type: Date,
     default: oneYearFromNow()
   },
   tickets: [ticketSchema]
 })
-function oneYearFromNow(){
+function oneYearFromNow() {
   const today = new Date()
-  console.log("Today",today.getFullYear()+1)
-  today.setFullYear(today.getFullYear()+1)
-  console.log(today)
+  today.setFullYear(today.getFullYear() + 1)
   return today
 }
 oneYearFromNow()
