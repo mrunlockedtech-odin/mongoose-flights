@@ -14,8 +14,17 @@ function index(req, res) {
     })
 }
 function newFlight(req, res) {
+  const newFlight = new Flight()
+  const dt = newFlight.departs
+  const departsDate = dt.toISOString().slice(0,16)
+  console.log(departsDate)
   res.render('flights/new', {
-    title: 'New Flight'
+    title: 'New Flight',
+    departsDate:departsDate
+  })
+  .catch(error => {
+    console.log(error)
+    res.redirect('/flights')
   })
 }
 function create(req, res) {
@@ -58,17 +67,15 @@ function update(req, res) {
     .then(flight => {
       res.redirect(`/flights/${flight._id}`)
     })
+    .catch(error => {
+      console.log(error)
+      res.redirect('/flights')
+    })
 }
 function edit(req, res) {
   Flight.findById(req.params.id)
     .then(flight => {
-      const stringDate = flight.departs.toISOString().slice(0, 16)
-      const time = flight.departs.toLocaleTimeString([], { timeStyle: 'short' })
-      const hour = time.substring(0, time.indexOf(':'))
-      const dayNight = time.slice(-2)
-      const updatedHour = dayNight === "AM" ? hour : String(parseInt(hour) + 12)
-      const paddedHour = updatedHour.padStart(2, '0')
-      const correctedDeparture = stringDate.slice(0, stringDate.indexOf("T") + 1) + paddedHour + stringDate.slice(stringDate.indexOf('T') + 3)
+      const correctedDeparture = flight.departs.toISOString().slice(0,16)
       res.render('flights/edit', {
         flight: flight,
         departure: correctedDeparture,
