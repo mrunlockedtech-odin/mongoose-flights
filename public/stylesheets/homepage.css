@@ -1,0 +1,15 @@
+body {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: Helvetica, sans-serif;
+  margin: 20% 0;
+  background-image: url('https://cdn.thomasnet.com/insights-images/5e3d3d9b-5bce-44ef-b115-89d72fecc2ba/750px.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+section{
+  background: rgba(115, 108, 211, 0.7);
+  color: white;
+}
