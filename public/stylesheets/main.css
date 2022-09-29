@@ -55,3 +55,18 @@ nav > a:hover {
 nav > a.active {
   color: white;
 }
+
+section {
+  display:grid;
+  align-items: center;
+  justify-content: center;
+}
+ul{
+  padding: 0;
+  display: block;
+  width: fit-content;
+  list-style: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}

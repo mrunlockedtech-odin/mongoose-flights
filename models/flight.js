@@ -14,11 +14,6 @@ const ticketSchema = new Schema({
 },
   { timestamps: true })
 
-const mealSchema = new Schema({
-  name: String
-},
-{timestamps:true})
-
 const flightSchema = new Schema({
   airline: {
     type: String,

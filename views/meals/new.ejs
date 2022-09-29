@@ -1,0 +1,19 @@
+<%- include('../partials/html-head') %>
+  <%- include('../partials/nav') %>
+
+    <main>
+      <h1>
+        <%= title %>
+      </h1>
+      <form id='add-meal-form' action="/meals" method="POST">
+        <label for="meal-name-input">Meal Name:</label>
+        <input type="text" name="name" id="meal-name-input">
+        <button type="submit">Add Meal</button>
+      </form>
+      <h2>Make sure the meal you are attempting to add has not already been added:
+      </h2>
+      <% meals.forEach(function(meal){ %>
+      <p><%= meal.name %></p>  
+      <% }) %>
+    </main>
+    <%- include('../partials/footer') %>
