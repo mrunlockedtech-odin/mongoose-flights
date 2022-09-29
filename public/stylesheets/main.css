@@ -1,12 +1,14 @@
 html{
   box-sizing: border-box;
 }
+
+
 body {
   background-color: gray;
   /* Use a system font, if none are available use an available sans-sarif font */
   margin: 0;
   color: white;
-  min-height: 20vh;
+  min-height: 50vh;
   display: grid;
   grid-template-rows: 50px 1fr;
   grid-template-areas:
@@ -18,9 +20,6 @@ body {
   font-family: Helvetica, sans-serif;
 }
 
-a {
-  color: #00B7FF;
-}
 body > nav {
   grid-area: nav;
   background-color: #b8c0c2;
@@ -30,11 +29,11 @@ body > nav {
   padding: 0 20px 0 30px;
 }
 nav > i {
-  width: 34px;
+  font-size: 30px;
+  width: 50px;
   object-fit: contain;
   margin-right: auto;
 }
-
 nav > a {
   margin: 20px;
   text-decoration: none;
@@ -55,6 +54,9 @@ nav > a:hover {
 nav > a.active {
   color: white;
 }
+
+
+
 
 section {
   display:grid;
